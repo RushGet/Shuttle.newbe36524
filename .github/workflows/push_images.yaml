@@ -1,0 +1,41 @@
+name: Run Sync by image-sync
+
+on:
+  workflow_call:
+    inputs:
+      image_sync_files:
+        required: true
+        type: string
+
+jobs:
+  image_sync:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image_sync_files: ${{ fromJson(inputs.image_sync_files) }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update auth.json
+        run: |
+          sed -i "s#DOCKERHUB_USERNAME#${DOCKERHUB_USERNAME}#g" auth.json
+          sed -i "s#DOCKERHUB_TOKEN#${{ secrets.DOCKERHUB_TOKEN }}#g" auth.json
+          sed -i "s#ALIYUN_USERNAME#${ALIYUN_USERNAME}#g" auth.json
+          sed -i "s#ALIYUN_TOKEN#${{ secrets.ALIYUN_TOKEN }}#g" auth.json
+      - uses: actions/download-artifact@v3
+        with:
+          name: data
+          path: data
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pipenv'
+      - name: pip install
+        run: |
+          pip install pipenv
+          pipenv install
+      - name: sync
+        id: sync
+        run: |
+          pipenv run inv sync --image-sync-file '${{ matrix.image_sync_files }}'

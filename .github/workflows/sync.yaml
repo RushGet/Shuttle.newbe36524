@@ -1,0 +1,56 @@
+name: sync images
+
+on:
+  push:
+    branches:
+      - publish
+  schedule:
+    # every two weeks
+    - cron: '0 0 */14 * *'
+
+env:
+  DOCKERHUB_USERNAME: newbe36524
+  DOCKERHUB_NAMESPACE: newbe36524
+  ALIYUN_USERNAME: pianzide1117
+  ALIYUN_NAMESPACE: newbe36524
+  TENCENTYUN_USERNAME: 472158246
+  TENCENTYUN_NAMESPACE: mcr_newbe36524
+jobs:
+  prepare_data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update auth.json
+        run: |
+          sed -i "s#DOCKERHUB_USERNAME#${DOCKERHUB_USERNAME}#g" auth.json
+          sed -i "s#DOCKERHUB_TOKEN#${{ secrets.DOCKERHUB_TOKEN }}#g" auth.json
+          sed -i "s#ALIYUN_USERNAME#${ALIYUN_USERNAME}#g" auth.json
+          sed -i "s#ALIYUN_TOKEN#${{ secrets.ALIYUN_TOKEN }}#g" auth.json
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pipenv'
+      - name: pip install
+        run: |
+          pip install pipenv
+          pipenv install
+      - name: pull and sync
+        id: create-data
+        run: |
+          pipenv run inv create-data
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: "data"
+          path: data
+    outputs:
+      image_sync_files: ${{ steps.create-data.outputs.image_sync_files }}
+  push:
+    uses: ./.github/workflows/push_images.yaml
+    # run when image_sync_files is not empty
+    if: ${{ needs.prepare_data.outputs.image_sync_files != '[]' }}
+    needs:
+      - prepare_data
+    with:
+      image_sync_files: ${{ needs.prepare_data.outputs.image_sync_files }}

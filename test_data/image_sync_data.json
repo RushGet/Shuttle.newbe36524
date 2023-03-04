@@ -1,0 +1,12 @@
+{
+    "mcr.microsoft.com/dotnet/aspnet:6.0": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine-amd64": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine-amd64",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine-arm32v7": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine-arm32v7",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine-arm64v8": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine-arm64v8",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.16": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine3.16",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.16-amd64": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine3.16-amd64",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.16-arm32v7": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine3.16-arm32v7",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.16-arm64v8": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine3.16-arm64v8",
+    "mcr.microsoft.com/dotnet/aspnet:6.0-alpine3.17": "registry.cn-hangzhou.aliyuncs.com/newbe36524/aspnet:6.0-alpine3.17"
+}
