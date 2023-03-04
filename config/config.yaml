@@ -315,3 +315,14 @@ images:
       - "^nanoserver$"
       - "^stretch$"
       - "^windowsservercore$"
+  - name: "dockerhub -> aliyun zipkin"
+    docker_registry: "docker.io"
+    image: "openzipkin/zipkin"
+    target: "registry.cn-hangzhou.aliyuncs.com/newbe36524/zipkin"
+    tag_regex_exclude:
+    tag_regex:
+      - "^latest$"
+      - "^latest-"
+      - "^2$"
+      - "^2-"
+      - "^1$"
