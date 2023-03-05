@@ -159,4 +159,4 @@ def sync(c, image_sync_file: str = ""):
     else:
         for file in os.listdir("data"):
             if file.endswith(".json"):
-                c.run(f"./image-syncer --auth=./auth.json --images=./data/{file} --proc=1")
+                c.run(f"./image-syncer --auth=./auth.json --images=./data/{file}")
