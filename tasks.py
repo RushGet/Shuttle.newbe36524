@@ -79,7 +79,7 @@ def match_tag_by_regex(tag: str, regex_list: list, regex_exclude_list: list = No
 
 def create_image_sync_data_json(items: list[ImageTransportation]) -> list[ImageSyncData]:
     # create json for image-syncer
-    limit_tags_count = 10
+    limit_tags_count = 25
     data = []
     for item in items:
         # spilt tags into chunks, each chunk has limit_tags_count tags
