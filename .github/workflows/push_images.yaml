@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 5
+      max-parallel: 1
       matrix:
         image_sync_files: ${{ fromJson(inputs.image_sync_files) }}
     steps:
